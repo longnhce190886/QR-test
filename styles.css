@@ -1304,7 +1304,7 @@ body {
 .detail-value { font-size: 14px; color: var(--text-primary); font-weight: 500; }
 
 /* ===========================
-   RESPONSIVE
+   RESPONSIVE — TABLET (≤1200px)
    =========================== */
 @media (max-width: 1200px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1312,30 +1312,247 @@ body {
   .scanner-layout { grid-template-columns: 1fr; }
   .dashboard-bottom { grid-template-columns: 1fr; }
 }
+
+/* ===========================
+   RESPONSIVE — MOBILE (≤900px)
+   =========================== */
 @media (max-width: 900px) {
   :root { --sidebar-width: 0px; }
+
+  /* Sidebar ẩn, mở bằng overlay */
   .sidebar {
     transform: translateX(-260px);
     width: 260px;
+    z-index: 200;
   }
   .sidebar.open {
     transform: translateX(0);
     box-shadow: var(--shadow-lg);
   }
+
+  /* Overlay khi sidebar mở trên mobile */
+  .sidebar.open::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    left: 260px;
+    background: rgba(0,0,0,0.5);
+    z-index: -1;
+  }
+
   .main-content { margin-left: 0; }
   .menu-toggle { display: flex; }
-  .page { padding: 20px 16px 32px; }
-  .page-header-row { flex-direction: column; }
-  .header-row-actions { width: 100%; }
+
+  /* Padding trang */
+  .page { padding: 16px 12px 100px; }
+
+  /* Header gọn hơn */
+  .top-header { padding: 0 12px; gap: 10px; }
+  .header-time { display: none; }
+  .header-title { font-size: 15px; }
+
+  /* Page header */
+  .page-header { margin-bottom: 20px; }
+  .page-header h1 { font-size: 20px; }
+  .page-header-row { flex-direction: column; gap: 12px; }
+  .page-header-row h1 { font-size: 20px; }
+  .header-row-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Search box full width */
+  .search-box { flex: 1; min-width: 0; }
+  .search-box input { width: 100% !important; }
+  .filter-select { flex: 1; min-width: 100px; }
+
+  /* Modal */
   .customer-detail-grid { grid-template-columns: 1fr; }
   .settings-stats { flex-direction: column; }
+
+  /* Scanner layout single col */
+  .scanner-layout { grid-template-columns: 1fr; gap: 16px; }
+  .scanner-controls { gap: 8px; }
+  .scanner-controls .btn { flex: 1; justify-content: center; font-size: 12px; padding: 9px 10px; }
+
+  /* Generate layout single col */
+  .generate-layout { grid-template-columns: 1fr; gap: 16px; }
 }
+
+/* ===========================
+   RESPONSIVE — SMALL MOBILE (≤600px)
+   =========================== */
 @media (max-width: 600px) {
-  .stats-grid { grid-template-columns: 1fr 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  .header-row-actions { flex-wrap: wrap; }
-  .search-box input { width: 100%; }
+  /* Stats grid 2 cols */
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat-card { padding: 14px 12px; gap: 10px; }
+  .stat-icon { width: 40px; height: 40px; border-radius: 10px; }
+  .stat-icon svg { width: 18px; height: 18px; }
+  .stat-value { font-size: 22px; }
+  .stat-label { font-size: 11px; }
+
+  /* Form single col */
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .form-card { padding: 16px; }
+  .qr-preview-card { padding: 16px; }
+
+  /* Bảng: scroll ngang + touch friendly */
+  .table-card {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .data-table { min-width: 560px; }
+  .data-table thead th { padding: 10px 12px; font-size: 10px; }
+  .data-table tbody td { padding: 10px 12px; font-size: 12px; }
+
+  /* Actions row trong bảng */
+  .table-actions { gap: 4px; }
+  .action-btn { width: 28px; height: 28px; }
+
+  /* Header actions */
+  .header-row-actions { gap: 8px; }
+  .btn { font-size: 12px; padding: 9px 12px; }
+  .btn svg { width: 13px; height: 13px; }
+
+  /* Toast */
+  .toast-container { top: 10px; right: 10px; left: 10px; }
+  .toast { min-width: unset; max-width: 100%; font-size: 12px; padding: 12px 14px; }
+
+  /* Modal full screen on small */
+  .modal-overlay { padding: 12px; align-items: flex-end; }
+  .modal {
+    padding: 24px 20px;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+  .modal-lg { max-width: 100%; }
+
+  /* Settings */
+  .settings-section { padding: 16px; }
+  .settings-form .form-group { margin-bottom: 10px; }
+
+  /* Scanner */
+  .scanner-card { padding: 16px; }
+  .scan-result-card { padding: 16px; }
+  .scanner-viewport { min-height: 260px; }
+
+  /* Chart */
+  .hourly-chart { height: 140px; gap: 3px; padding: 12px; }
+  .chart-label { font-size: 7px; }
+
+  /* Dashboard bottom */
+  .dashboard-bottom { gap: 12px; }
+  .recent-list { max-height: 240px; }
+  .recent-item { padding: 10px 14px; gap: 10px; }
+  .recent-avatar { width: 30px; height: 30px; font-size: 11px; }
+
+  /* Page padding bottom để không bị che bởi bottom nav */
+  .page { padding-bottom: 90px; }
 }
+
+/* ===========================
+   RESPONSIVE — EXTRA SMALL (≤400px)
+   =========================== */
 @media (max-width: 400px) {
-  .stats-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .stat-value { font-size: 20px; }
+
+  .page-header h1,
+  .page-header-row h1 { font-size: 18px; }
+
+  .btn { font-size: 11px; padding: 8px 10px; gap: 5px; }
+
+  /* Scanner controls 2x2 */
+  .scanner-controls { display: grid; grid-template-columns: 1fr 1fr; }
+  .scanner-controls .btn { width: 100%; }
+
+  .top-header { gap: 8px; }
+  .header-title { font-size: 14px; }
+}
+
+/* ===========================
+   BOTTOM NAVIGATION (mobile only)
+   Thay thế sidebar bằng bottom bar
+   =========================== */
+@media (max-width: 900px) {
+  /* Bottom nav bar */
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: rgba(10, 10, 20, 0.95);
+    border-top: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 150;
+    padding: 0 4px;
+    align-items: stretch;
+  }
+  .bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 8px 4px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition);
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .bottom-nav-item svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    transition: transform var(--transition);
+  }
+  .bottom-nav-item.active {
+    color: var(--accent-primary);
+  }
+  .bottom-nav-item.active svg {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 6px rgba(99,102,241,0.5));
+  }
+  .bottom-nav-item:active {
+    background: var(--bg-card);
+  }
+}
+
+/* Ẩn bottom nav trên desktop */
+@media (min-width: 901px) {
+  .bottom-nav { display: none !important; }
+}
+
+/* ===========================
+   TOUCH IMPROVEMENTS
+   =========================== */
+@media (hover: none) and (pointer: coarse) {
+  /* Touch targets tối thiểu 44px */
+  .nav-item { min-height: 44px; }
+  .btn { min-height: 44px; }
+  .action-btn { width: 36px !important; height: 36px !important; }
+  .btn-icon { width: 40px !important; height: 40px !important; }
+
+  /* Bỏ hover effects trên touch */
+  .stat-card:hover { transform: none; box-shadow: none; }
+  .btn-primary:hover { transform: none; }
+  .btn-danger:hover { transform: none; }
+  .nav-item:hover svg { transform: none; }
+
+  /* Active states rõ hơn */
+  .btn:active { opacity: 0.75; transform: scale(0.97); }
+  .action-btn:active { opacity: 0.75; }
 }

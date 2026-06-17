@@ -387,6 +387,10 @@ const Nav = {
         if (window.innerWidth <= 900) document.getElementById('sidebar').classList.remove('open');
       });
     });
+    // Bottom nav (mobile)
+    document.querySelectorAll('.bottom-nav-item').forEach(item => {
+      item.addEventListener('click', () => this.navigate(item.dataset.page));
+    });
     document.getElementById('menu-toggle').addEventListener('click', () => {
       document.getElementById('sidebar').classList.toggle('open');
     });
@@ -398,6 +402,7 @@ const Nav = {
     if (STATE.currentPage === 'scanner' && page !== 'scanner') Scanner.stop();
     STATE.currentPage = page;
     document.querySelectorAll('.nav-item').forEach(i => i.classList.toggle('active', i.dataset.page === page));
+    document.querySelectorAll('.bottom-nav-item').forEach(i => i.classList.toggle('active', i.dataset.page === page));
     document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === `page-${page}`));
     const titles = { dashboard: 'Dashboard', generate: 'Tạo Mã QR', scanner: 'Quét Mã QR', customers: 'Khách Hàng', history: 'Lịch Sử Check-in', settings: 'Cài Đặt' };
     document.getElementById('header-title').textContent = titles[page] || page;
