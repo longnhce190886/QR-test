@@ -1323,14 +1323,10 @@ const App = {
 
       console.log('✅ QR Check-In Pro UI ready — Local mode');
 
-      // Load demo data ở nền nếu rỗng
-      Demo.load().then(() => {
-        Dashboard.refresh();
-        SidebarStats.refresh();
-      }).catch(err => console.warn('Demo load:', err));
-
       // ══ FASE 2: KẾT NỐI FIREBASE Ở NỀN (không block UI) ══
       if (window.IS_FIREBASE_CONFIGURED) {
+        // ⚠️ KHÔNG gọi Demo.load() ở đây khi Firebase được cấu hình
+        // Demo sẽ được kiểm tra SAU khi biết Firebase có rỗng không
         StorageService._setConnectingBadge(true);
 
         FirebaseAdapter.init().then(() => {
@@ -1357,6 +1353,15 @@ const App = {
             if (STATE.currentPage === 'history') History.render();
             Toast.success('✅ Đã kết nối Firebase Cloud!');
             console.log('✅ Switched to Firebase mode');
+
+            // Chỉ load demo nếu Firebase CŨNG rỗng (project mới hoàn toàn)
+            // Điều này tránh ghi đè data thật của user
+            if (STATE.customers.length === 0) {
+              Demo.load().then(() => {
+                Dashboard.refresh();
+                SidebarStats.refresh();
+              }).catch(err => console.warn('Demo load:', err));
+            }
           });
 
         }).catch(err => {
@@ -1368,7 +1373,20 @@ const App = {
             Toast.error('Lỗi Firebase: ' + err.message.slice(0, 80));
           }
           console.warn('Firebase failed:', err.message);
+          // Firebase thất bại → fallback local, load demo nếu rỗng
+          if (STATE.customers.length === 0) {
+            Demo.load().then(() => {
+              Dashboard.refresh();
+              SidebarStats.refresh();
+            }).catch(err => console.warn('Demo load:', err));
+          }
         });
+      } else {
+        // Local mode (không có Firebase) → load demo nếu local rỗng
+        Demo.load().then(() => {
+          Dashboard.refresh();
+          SidebarStats.refresh();
+        }).catch(err => console.warn('Demo load:', err));
       }
 
     } catch (err) {
