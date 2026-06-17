@@ -387,6 +387,13 @@ const Nav = {
         if (window.innerWidth <= 900) document.getElementById('sidebar').classList.remove('open');
       });
     });
+<<<<<<< HEAD
+=======
+    // Bottom nav (mobile)
+    document.querySelectorAll('.bottom-nav-item').forEach(item => {
+      item.addEventListener('click', () => this.navigate(item.dataset.page));
+    });
+>>>>>>> 00f1bd8c4197cd05ae09f11905ac1bc257c75103
     document.getElementById('menu-toggle').addEventListener('click', () => {
       document.getElementById('sidebar').classList.toggle('open');
     });
@@ -398,6 +405,10 @@ const Nav = {
     if (STATE.currentPage === 'scanner' && page !== 'scanner') Scanner.stop();
     STATE.currentPage = page;
     document.querySelectorAll('.nav-item').forEach(i => i.classList.toggle('active', i.dataset.page === page));
+<<<<<<< HEAD
+=======
+    document.querySelectorAll('.bottom-nav-item').forEach(i => i.classList.toggle('active', i.dataset.page === page));
+>>>>>>> 00f1bd8c4197cd05ae09f11905ac1bc257c75103
     document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === `page-${page}`));
     const titles = { dashboard: 'Dashboard', generate: 'Tạo Mã QR', scanner: 'Quét Mã QR', customers: 'Khách Hàng', history: 'Lịch Sử Check-in', settings: 'Cài Đặt' };
     document.getElementById('header-title').textContent = titles[page] || page;
@@ -717,6 +728,29 @@ const Scanner = {
     this.showResult('success', customer, null, checkIn);
     this.addToMiniHistory(customer, checkIn);
     Toast.success(`✓ Check-in: ${customer.name}`);
+<<<<<<< HEAD
+=======
+
+    // Tự động tắt camera sau khi quét thành công
+    if (this.scanning) {
+      // Flash viewport xanh lá để báo thành công
+      const viewport = document.getElementById('scanner-viewport');
+      if (viewport) {
+        viewport.style.transition = 'border-color 0.15s ease, box-shadow 0.15s ease';
+        viewport.style.borderColor = 'var(--accent-success)';
+        viewport.style.boxShadow = '0 0 0 3px rgba(16,185,129,0.35), inset 0 0 40px rgba(16,185,129,0.1)';
+      }
+      // Dừng camera sau 1.8s
+      setTimeout(async () => {
+        await this.stop();
+        if (viewport) {
+          viewport.style.borderColor = '';
+          viewport.style.boxShadow = '';
+        }
+      }, 1800);
+    }
+
+>>>>>>> 00f1bd8c4197cd05ae09f11905ac1bc257c75103
   },
 
   showResult(type, customer, unknownId, checkIn) {
