@@ -722,6 +722,26 @@ const Scanner = {
     this.showResult('success', customer, null, checkIn);
     this.addToMiniHistory(customer, checkIn);
     Toast.success(`✓ Check-in: ${customer.name}`);
+
+    // Tự động tắt camera sau khi quét thành công
+    if (this.scanning) {
+      // Flash viewport xanh lá để báo thành công
+      const viewport = document.getElementById('scanner-viewport');
+      if (viewport) {
+        viewport.style.transition = 'border-color 0.15s ease, box-shadow 0.15s ease';
+        viewport.style.borderColor = 'var(--accent-success)';
+        viewport.style.boxShadow = '0 0 0 3px rgba(16,185,129,0.35), inset 0 0 40px rgba(16,185,129,0.1)';
+      }
+      // Dừng camera sau 1.8s
+      setTimeout(async () => {
+        await this.stop();
+        if (viewport) {
+          viewport.style.borderColor = '';
+          viewport.style.boxShadow = '';
+        }
+      }, 1800);
+    }
+
   },
 
   showResult(type, customer, unknownId, checkIn) {
