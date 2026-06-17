@@ -387,10 +387,13 @@ const Nav = {
         if (window.innerWidth <= 900) document.getElementById('sidebar').classList.remove('open');
       });
     });
+<<<<<<< HEAD
+=======
     // Bottom nav (mobile)
     document.querySelectorAll('.bottom-nav-item').forEach(item => {
       item.addEventListener('click', () => this.navigate(item.dataset.page));
     });
+>>>>>>> 00f1bd8c4197cd05ae09f11905ac1bc257c75103
     document.getElementById('menu-toggle').addEventListener('click', () => {
       document.getElementById('sidebar').classList.toggle('open');
     });
@@ -402,7 +405,10 @@ const Nav = {
     if (STATE.currentPage === 'scanner' && page !== 'scanner') Scanner.stop();
     STATE.currentPage = page;
     document.querySelectorAll('.nav-item').forEach(i => i.classList.toggle('active', i.dataset.page === page));
+<<<<<<< HEAD
+=======
     document.querySelectorAll('.bottom-nav-item').forEach(i => i.classList.toggle('active', i.dataset.page === page));
+>>>>>>> 00f1bd8c4197cd05ae09f11905ac1bc257c75103
     document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === `page-${page}`));
     const titles = { dashboard: 'Dashboard', generate: 'Tạo Mã QR', scanner: 'Quét Mã QR', customers: 'Khách Hàng', history: 'Lịch Sử Check-in', settings: 'Cài Đặt' };
     document.getElementById('header-title').textContent = titles[page] || page;
@@ -722,6 +728,8 @@ const Scanner = {
     this.showResult('success', customer, null, checkIn);
     this.addToMiniHistory(customer, checkIn);
     Toast.success(`✓ Check-in: ${customer.name}`);
+<<<<<<< HEAD
+=======
 
     // Tự động tắt camera sau khi quét thành công
     if (this.scanning) {
@@ -742,6 +750,7 @@ const Scanner = {
       }, 1800);
     }
 
+>>>>>>> 00f1bd8c4197cd05ae09f11905ac1bc257c75103
   },
 
   showResult(type, customer, unknownId, checkIn) {

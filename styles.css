@@ -1304,7 +1304,11 @@ body {
 .detail-value { font-size: 14px; color: var(--text-primary); font-weight: 500; }
 
 /* ===========================
+<<<<<<< HEAD
+   RESPONSIVE
+=======
    RESPONSIVE — TABLET (≤1200px)
+>>>>>>> 00f1bd8c4197cd05ae09f11905ac1bc257c75103
    =========================== */
 @media (max-width: 1200px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1312,6 +1316,13 @@ body {
   .scanner-layout { grid-template-columns: 1fr; }
   .dashboard-bottom { grid-template-columns: 1fr; }
 }
+<<<<<<< HEAD
+@media (max-width: 900px) {
+  :root { --sidebar-width: 0px; }
+  .sidebar {
+    transform: translateX(-260px);
+    width: 260px;
+=======
 
 /* ===========================
    RESPONSIVE — MOBILE (≤900px)
@@ -1324,11 +1335,30 @@ body {
     transform: translateX(-260px);
     width: 260px;
     z-index: 200;
+>>>>>>> 00f1bd8c4197cd05ae09f11905ac1bc257c75103
   }
   .sidebar.open {
     transform: translateX(0);
     box-shadow: var(--shadow-lg);
   }
+<<<<<<< HEAD
+  .main-content { margin-left: 0; }
+  .menu-toggle { display: flex; }
+  .page { padding: 20px 16px 32px; }
+  .page-header-row { flex-direction: column; }
+  .header-row-actions { width: 100%; }
+  .customer-detail-grid { grid-template-columns: 1fr; }
+  .settings-stats { flex-direction: column; }
+}
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .header-row-actions { flex-wrap: wrap; }
+  .search-box input { width: 100%; }
+}
+@media (max-width: 400px) {
+  .stats-grid { grid-template-columns: 1fr; }
+=======
 
   /* Overlay khi sidebar mở trên mobile */
   .sidebar.open::after {
@@ -1555,4 +1585,5 @@ body {
   /* Active states rõ hơn */
   .btn:active { opacity: 0.75; transform: scale(0.97); }
   .action-btn:active { opacity: 0.75; }
+>>>>>>> 00f1bd8c4197cd05ae09f11905ac1bc257c75103
 }
